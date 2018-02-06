@@ -10,8 +10,6 @@
      
 ### Instructions
 
-
-9. Add the code required to import the `keys.js` file and store it in a variable.
   
 * You should then be able to access your keys information like so
 
