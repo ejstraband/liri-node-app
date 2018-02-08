@@ -1,12 +1,10 @@
 require("dotenv").config();
 
-var request = require("request");
-
-var liriNeeds = require("./keys.js");
+var liriNeeds = require("./keys");
 
 // commented out to work on the movie search
 // var spotify = new Spotify(keys.spotify);
-// var client = new Twitter(keys.twitter);
+
 
 var functionOperation = process.argv[2];
 console.log("function selected: " + functionOperation);
@@ -17,6 +15,17 @@ console.log("Search Term: " + searchTerm);
 function myTweets() {
 // This will show your last 20 tweets and when they were created at in your terminal/bash window
     console.log("function: myTweets");
+
+    var Twitter = require('twitter');
+    var client = new Twitter(liriNeeds.Twitter);
+
+    var params = {screen_name: 'TheMovieGuy9000'};
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+
+    }
+});
 }
 
 function spotifyThisSong() {
@@ -39,6 +48,14 @@ function movieThis() {
 //   * Language of the movie.
 //   * Plot of the movie.
 //   * Actors in the movie.
+    
+    var request = require("request");
+
+    // If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody
+    if (searchTerm == null) {
+        searchTerm = "Mr. Nobody";
+    }
+
     console.log("function: movieThis");
     console.log("selected movie is: " + searchTerm);
 
